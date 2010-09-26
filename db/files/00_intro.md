@@ -11,12 +11,12 @@ Windows
 Either take responsibility to figure out how to install Ruby 1.9.2 and
 Rails 3.0 and Git and whatever else.
 
-Ruby 1.9.2: [Win Installer](http://rubyforge.org/frs/download.php/72170/rubyinstaller-1.9.2-p0.exe)
-Git: [Git For Windows](http://code.google.com/p/msysgit/)
+* Ruby 1.9.2: [Win Installer](http://rubyforge.org/frs/download.php/72170/rubyinstaller-1.9.2-p0.exe)
+* Git: [Git For Windows](http://code.google.com/p/msysgit/)
 
 *or*
 
-Install Ubuntu 10.04.1 either as a dual boot option or in a virtual
+* Install Ubuntu 10.04.1 either as a dual boot option or in a virtual
 machine like VirtualBox.
 
 Ubuntu
@@ -28,7 +28,8 @@ git-core
 OS X
 ----
 
-Install Xcode. Install Git.
+* Install Xcode. 
+* Install Git.
 
 B. Install RVM (Linux or OS X)
 ------------------------------
