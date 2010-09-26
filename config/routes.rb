@@ -5,6 +5,7 @@ MdDocs::Application.routes.draw do
 
   # add / route
   match '' => 'public#index'
+  match 'public/chapter/:name' => 'public#chapter'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
