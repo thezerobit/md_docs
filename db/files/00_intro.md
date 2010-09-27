@@ -1,5 +1,5 @@
-Rails Class Notes : Introduction to Ruby and Rails
---------------------------------------------------
+Introduction to Ruby and Rails
+------------------------------
 
 
 A. Getting a Good UNIX Environment
@@ -23,11 +23,6 @@ Git:
 * [Git For Windows](http://code.google.com/p/msysgit/)
 * Click Download, select msysGit-fullinstall.....
 * Run installer, installs to C:\msysgit
-
-*or*
-
-* Install Ubuntu 10.04.1 either as a dual boot option or in a virtual
-machine like VirtualBox.
 
 Ubuntu
 ------
