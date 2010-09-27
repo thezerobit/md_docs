@@ -1,7 +1,9 @@
-<strong>Rails Class Notes</strong>
+<h2>Rails Class Notes</h2>
 <ul>
   <% @files.each do |file| %>
-    <li><a href="<%= url_for(:action => 'chapter') %>/<%= file %>"><%= file %></a></li>
+    <li><a href="<%= url_for(:action => 'chapter') %>/<%= file %>">
+      <%= file.capitalize %></a>
+    </li>
   <% end %>
 </ul>
 
