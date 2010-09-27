@@ -1,5 +1,5 @@
-Advanced Web Development with Ruby on Rails
--------------------------------------------
+Rails Class Notes : Introduction to Ruby and Rails
+--------------------------------------------------
 
 
 A. Getting a Good UNIX Environment
