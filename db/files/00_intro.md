@@ -9,14 +9,17 @@ Windows
 -------
 
 Ruby 1.9.2: 
+
 * [Win Installer](http://rubyforge.org/frs/download.php/72170/rubyinstaller-1.9.2-p0.exe)
 * Select *"Add Ruby Executables to PATH"* when installing Ruby
 
 SQLite3
+
 * [zip](http://www.sqlite.org/sqlitedll-3_7_2.zip)
 * extract and copy sqlite3.dll into C:\Ruby192\bin
 
 Git: 
+
 * [Git For Windows](http://code.google.com/p/msysgit/)
 * Click Download, select msysGit-fullinstall.....
 * Run installer, installs to C:\msysgit
