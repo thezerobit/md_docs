@@ -4,6 +4,7 @@ class FileModel
     files = []
     re = /^db\/files\/(\d+)_(.+)\.md$/
     filenames = Dir.glob("db/files/*")
+    filenames.sort!
     filenames.each { |filename|
       m = filename.match(re)
       files.push(m[2]) if m
