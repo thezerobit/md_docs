@@ -341,15 +341,3 @@ Ruby beginners.
 
 Official Ruby Webpage: [ruby-lang.org](http://www.ruby-lang.org/en/)
 
-Rails and MVC
--------------
-
-MVC stands for Model View Controller. It's a way to separate different
-parts of the code that do different things. The Controller is the part
-of the code that accepts incoming requests and decides what to do. The
-Model is the part of the code that takes care of interacting with the
-database and may contain some business logic as well. The View is the
-part of the code responsible for rendering HTML back to the browser that
-sent the request.
-
-
