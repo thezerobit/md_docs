@@ -36,6 +36,41 @@ OS X
 * Install Xcode. 
 * Install Git.
 
+Important Note on Shell Commands
+--------------------------------
+
+Whenever the instructions show entering commands after a dollar sign
+($), those commands are to be entered in the shell, preferably the bash
+shell. On OS X this application will be called Terminal, on Linux it
+will be called Terminal or Xterm. On Windows, there is a .bat file in
+C:\msysgit\msysgit called msysgit.bat. Double click on that file to open
+a bash shell. So something like this:
+
+    $ ls -la
+
+Means enter "ls -la" and hit enter in the bash shell. Another important
+note is that certain commands need to be entered while in a particular
+working directory. Type 'pwd' and hit enter to see the directory you are
+working in.
+
+    $ pwd
+    /home/steve/rails_stuff/my_project
+
+The 'cd' command, which stands for 'change directory' is very handy. If
+you run it without a directory name, it will take you to your home
+directory. Give it the name of a folder to move into or '..' to back
+out.
+
+    $ cd
+    $ pwd
+    /home/steve
+    $ cd rails_stuff
+    $ pwd
+    /home/steve/rails_stuff
+    $ cd ..
+    $ pwd
+    /home/steve
+
 B. Install RVM (Linux or OS X)
 ------------------------------
 
@@ -43,6 +78,7 @@ B. Install RVM (Linux or OS X)
 
 [Install RVM](http://rvm.beginrescueend.com/rvm/install/)
 
+    $ cd
     $ mkdir rvm
     $ cd rvm
     $ curl http://rvm.beginrescueend.com/releases/rvm-install-head > install
@@ -61,6 +97,9 @@ C. Install Ruby 1.9.2 (Linux or OS X)
 
 D. Install Rails 3 (All Platforms)
 ----------------------------------
+
+This command needs to be run in the bash shell. See instructions above
+on how to get a working shell.
 
     $ gem install rails
 
