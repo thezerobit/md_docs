@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MdDocs</title>
+  <title>rails class notes : <%= @title %></title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/reset-fonts-grids.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
   <link rel="stylesheet" type="text/css" href="/prettify/prettify.css" />
   <script type="text/javascript" src="/prettify/prettify.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -14,33 +16,84 @@
       prettyPrint();
     });
   </script>
-  <style type="text/css">
-    div.main {
-      max-width: 600px;
+  <style>
+    body {
+      background:gray;
+    }
+    #yui-main {
+      background:#BBB;
+      -moz-box-shadow: 3px 3px 4px #000;
+      -webkit-box-shadow: 3px 3px 4px #000;
+      box-shadow: 3px 3px 4px #000;
+    }
+    .yui-b {
+      padding: 20px;
+    }
+    h2 {
+      text-shadow: #999 1px 1px 1px;
+    }
+    code {
+      text-shadow: #666 0px 0px 2px;
     }
   </style>
 </head>
 <body>
-
 
   <a href="http://github.com/deliciousrobots/md_docs"><img style="position: absolute;
     top: 0; right: 0; border: 0;"
     src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"
     alt="Fork me on GitHub"></a>
 
-<div class="main">
-<h2>Rails Class Notes : <%= @title %></h2>
-<p>Nav: <a href="/">Index</a></p>
+<div id="doc2" class="yui-t4">
 
-<hr />
+  <div id="hd">
 
-<%= yield %>
+    <a href="/"><img src="/images/title.png" alt="rails class notes" /></a>
 
-<hr />
+  </div>
 
+  <div id="bd">
+
+    <div id="yui-main">
+
+      <div class="yui-b">
+
+        <%= yield %>
+
+      </div>
+
+    </div>
+
+    <div class="yui-b">
+
+      <h2>Sections: </h2>
+      <ol>
+        <% @files.each do |file| %>
+          <li>
+            <% if file.capitalize != @title %>
+              <% if file == 'index' %>
+              <a href="/">
+              <% else %>
+              <a href="<%= url_for(:action => 'chapter') %>/<%= file %>">
+              <% end %>
+              <%= file.capitalize %></a>
+            <% else %>
+              <%= file.capitalize %> &lt;-- you are here
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+
+    </div>
+
+  </div>
+
+  <div id="ft">
+
+    <br />
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img
 alt="Creative Commons License" style="border-width:0"
-src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br /><span
+src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><span
 xmlns:dc="http://purl.org/dc/elements/1.1/"
 href="http://purl.org/dc/dcmitype/Text" property="dc:title" rel="dc:type">Rails
 Class Notes</span> by <a xmlns:cc="http://creativecommons.org/ns#"
@@ -49,6 +102,9 @@ rel="cc:attributionURL">Stephen A. Goss</a> is licensed under a <a
 rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative
 Commons Attribution-ShareAlike 3.0 Unported License</a>.
 
+  </div>
+
 </div>
+
 </body>
 </html>
