@@ -248,11 +248,12 @@ The parentheses when calling a function are optional:
 
 There are different kinds of scope, the visibility of variables which
 depends on the first letter of the name of the variable:
-* Local variables start with a-z or the underscore
-* Global variable start with the dollar sign
-* Instance variables start with @
-* Class variables start with @@
-* Constant variables start with a capital letter A-Z, similar to globals
+
+ * Local variables start with a-z or the underscore
+ * Global variable start with the dollar sign
+ * Instance variables start with @
+ * Class variables start with @@
+ * Constant variables start with a capital letter A-Z, similar to globals
 
 So far we've used local variables, which are only available "locally".
 For example:
