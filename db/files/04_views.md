@@ -73,7 +73,74 @@ array. In this case, we have a single command that just prints the
 element, the *puts* function.
 
 Embedded Ruby allows you to use this syntax to render elements from an
-array in a loop.
+array in an ordered list.
 
-    <% some_array = ["Steve", "
+    <ol>
+      <% some_array = ["Billy", "Bobby", "Jimmy"] %>
+      <% some_array.each do |name| %>
+        <li> <%= name %> </li>
+      <% end %>
+    </ol>
+
+If you replace the contents of *app/views/public/index.html.erb* with
+that markup and navigate to [localhost:3000](http://localhost:3000/) you
+should see the following:
+
+> 1. Billy
+> 2. Bobby
+> 3. Jimmy
+
+The markup for the body of the response looks like this:
+
+    <ol> 
+        <li> Billy </li> 
+        <li> Bobby </li> 
+        <li> Jimmy </li> 
+    </ol> 
+
+Text rendered to your response from Ruby variables is escaped by
+default, so user-entered data, for example, will not change the
+rendering of the page which is a security issue. Let's try a different
+array of string:
+
+    <ol>
+      <% some_array = ["Billy", "Bobby", "<script>alert('danger!')</script>"] %>
+      <% some_array.each do |name| %>
+        <li> <%= name %> </li>
+      <% end %>
+    </ol>
+
+Just renders:
+
+> 1. Billy
+> 2. Bobby
+> 3. &lt;script&gt;alert('danger!');&lt;/script&gt;
+
+If you look at the HTML response, you can see the escaping:
+
+    <ol> 
+        <li> Billy </li> 
+        <li> Bobby </li> 
+        <li> &lt;script&gt;alert('danger!');&lt;/script&gt; </li> 
+    </ol> 
+
+Rails replaced the *&lt;* and *&gt;* symbols with the HTML entities
+'*&amp;lt;*' and '*&amp;gt;*'.
+
+If you want, you can disable the escaping by telling Rails that the
+string is safe to be rendered directly as HTML:
+
+    <ol>
+      <% some_array = ["Billy", "Bobby", "<script>alert('danger!')</script>"] %>
+      <% some_array.each do |name| %>
+        <li> <%= name.html_safe %> </li>
+      <% end %>
+    </ol>
+
+Loading, the page, you will see a popup that says, "Danger!". As you can
+see, it is generally best to leave the normal escaping on, since you
+wouldn't want user entered data to be able to execute arbitrary JavaScript 
+code in the browser.
+
+
 
