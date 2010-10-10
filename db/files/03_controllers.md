@@ -167,3 +167,20 @@ And edit *app/views/index.html.erb* to look like this:
     <p>Find me in app/views/public/index.html.erb</p>
 
     <p>Params : <%= @params %></p>
+
+Now the page will echo back the contents of the *params* hash.
+[localhost:3000/?page=10](http://localhost:3000/?page=10) will look
+something like this:
+
+
+> Public#index
+> ------------
+>
+> Find me in app/views/public/index.html.erb
+>
+> Params : {"page"=>"10", "controller"=>"public", "action"=>"index"}
+
+The "page" parameter is clearly set, as well as the controller and
+action names.
+
+
