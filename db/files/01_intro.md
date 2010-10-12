@@ -82,9 +82,27 @@ B. Install RVM (Linux or OS X)
     $ mkdir rvm
     $ cd rvm
     $ curl http://rvm.beginrescueend.com/releases/rvm-install-head > install
-    $ sh install
+    $ bash install
 
-Follow post install instructions: edit ~/.bashrc according to webpage.
+Create a file in your home folder called *.bash_profile*. You can do
+this by using the nano editor:
+
+    $ nano ~/.bash_profile
+
+The file should contain this line:
+
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+After creating that file, reboot OS X. If you are in Linux merely
+logging out and logging back in should be sufficient.
+
+After you have logged in, run the following command in the terminal:
+
+    which rvm
+
+If there is no output, then you have failed. Otherwise, it should show
+the location of the rvm script, in which case you are probably good to
+go.
 
 C. Install Ruby 1.9.2 (Linux or OS X)
 -------------------------------------
@@ -97,6 +115,10 @@ C. Install Ruby 1.9.2 (Linux or OS X)
 
 D. Install Rails 3 (All Platforms)
 ----------------------------------
+
+Before installing Rails from the command line, make sure that you are
+running the correct version of Ruby. You can find out by typing *ruby
+-v* as shown above. You should be running Ruby 1.9.2.
 
 This command needs to be run in the bash shell. See instructions above
 on how to get a working shell.
