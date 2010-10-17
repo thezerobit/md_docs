@@ -183,7 +183,7 @@ scaffold generator was nice enough to create:
         <td><%= category.description %></td>
         <td><%= link_to 'Show', category %></td>
         <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => #
+        <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
       </tr>
     <% end %>
     </table>
