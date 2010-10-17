@@ -5,7 +5,7 @@ Rails comes with the ability to quickly create working data models. For
 production applications, it might not fit exactly what you need, but it
 makes for an excellent learning tool.
 
-If we want to add "Category" model with two fields, a name and a
+If we want to add a "Category" model with two fields, a name and a
 description, we could do something like this (like all "rails" script
 commands, this should be run in the project folder):
 
@@ -39,7 +39,7 @@ This is the output:
           create    public/stylesheets/scaffold.css
 
 As you can see, rails has done quite a bit of work. First lets look at
-the file it made in the db/migrate folder. The name of the file starts
+the file it made in the *db/migrate* folder. The name of the file starts
 with a timestamp, which helps guarantee it's uniqueness. It looks like
 this:
 
@@ -72,10 +72,9 @@ this migration.
     ==  CreateCategories: migrated (0.0040s) ======================================
 
 After you run the *rake db:migrate* command, you'll notice that there is
-a file *db/schema* that has been created. That file serves as a
-description of the database that the application uses. You shouldn't
-edit it, but just add migrations. That file should now look something
-like this:
+a file *db/schema.rb* that has been created. That file serves as a
+description of the database for the application. You shouldn't edit it,
+but just add migrations. That file should now look something like this:
 
     # This file is auto-generated from the current state of the database. Instead
     # of editing this file, please use the migrations feature of Active Record to
@@ -234,7 +233,7 @@ partial template:
     <%= form_for(@category) do |f| %>
       <% if @category.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@category.errors.count, "error") %> prohibited this categ#
+          <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
           <ul>
           <% @category.errors.full_messages.each do |msg| %>
@@ -257,7 +256,6 @@ partial template:
       </div>
     <% end %>
 
-
 This form is packed with a lot of important bits and warrants further
 study. What is important to note is that the *form_for* helper generates
 a form that posts to the */categories* just like the index action, but
@@ -276,11 +274,11 @@ controller action:
 
       respond_to do |format|
         if @category.save
-          format.html { redirect_to(@category, :notice => 'Category was successfull#
-          format.xml  { render :xml => @category, :status => :created, :location =>#
+          format.html { redirect_to(@category, :notice => 'Category was successfully created.') }
+          format.xml  { render :xml => @category, :status => :created, :location => @category }
         else
           format.html { render :action => "new" }
-          format.xml  { render :xml => @category.errors, :status => :unprocessable_#
+          format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
         end
       end
     end
