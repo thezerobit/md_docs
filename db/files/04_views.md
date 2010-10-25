@@ -142,5 +142,74 @@ see, it is generally best to leave the normal escaping on, since you
 wouldn't want user entered data to be able to execute arbitrary JavaScript 
 code in the browser.
 
+Using Git to Undo Temporary Changes
+-----------------------------------
+
+If you've been following along these sections, then your Rails app will
+be a Git repository. If so, you've made some changes in this section,
+mainly just to the *app/views/public/index.html.erb* file. In any event,
+lets ask Git what has changed.
+
+    $ git status
+    # On branch master
+    # Changed but not updated:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    # modified:   app/views/public/index.html.erb
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+Ah, so git know what files have changed. We can even get more detail:
+
+    git diff
+    diff --git a/app/views/public/index.html.erb b/app/views/public/index.html.erb
+    index 44317c5..fd3af64 100644
+    --- a/app/views/public/index.html.erb
+    +++ b/app/views/public/index.html.erb
+    @@ -1,4 +1,6 @@
+    -<h1>Public#index</h1>
+    -<p>Find me in app/views/public/index.html.erb</p>
+    -
+    -<p>Params : <%= @params %></p>
+    +<ol>
+    +  <% some_array = ["Billy", "Bobby", "Jimmy"] %>
+    +  <% some_array.each do |name| %>
+    +    <li> <%= name %> </li>
+    +  <% end %>
+    +</ol>
+
+Well, I'm not crazy about the Billy and Bobby stuff, so let's take the
+opportunity to back out these changes. They haven't been staged or
+committed yet, so it should be easy. In fact, *git status* told us what
+to do, it said 
+
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+
+Let's follow its instructions:
+
+    $ git checkout -- app/views/public/index.html.erb
+
+Git is silent, again.
+
+    $ git status
+    # On branch master
+    nothing to commit (working directory clean)
+
+Aha! The change has been reverted. Let's see what the file looks like:
+
+    $ cat app/views/public/index.html.erb 
+    <h1>Public#index</h1>
+    <p>Find me in app/views/public/index.html.erb</p>
+
+    <p>Params : <%= @params %></p>
+
+*cat* is a handy Unix tool that just prints the contents of a file to
+the screen. Here we can use it to see what's in a file without having to
+open it up in an editor. Here we see the file is back to its old self
+without any of the Billy and Bobby nonsense.
+
+See you in the next section!
+
 
 
