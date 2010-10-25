@@ -342,9 +342,10 @@ and line numbers. Those will usually point you in the right direction.
 There are two types of bugs: syntax errors, where a typo makes your code
 invalid, and logic errors where the code you've written is valid code,
 but it just happens to do something different than what you were hoping
-it would do. Keep that in mind, Rails will do what ever you tell it to,
-even if it isn't what you might expect, so you might now get an error
-message every time something is wrong.
+it would do. Keep in mind that Rails will do what ever you tell it to,
+even if it isn't what you want it to do, so you might not get an error
+message every time something is wrong. You might just get unexpected
+output.
 
 
 
