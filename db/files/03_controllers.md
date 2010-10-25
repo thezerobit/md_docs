@@ -114,7 +114,7 @@ A Note on Ruby Hashes
 A Ruby hash is a data structure that represents any number of mappings.
 A hash looks like this:
 
-    { :page => 10, :this => 'that', :a => 'b' }
+    { 'page' => 10, 'this' => 'that', 'a' => 'b' }
 
 They can be assigned to variables and values extracted or assigned
 through the square bracket syntax. Let's fire up *irb* and take them for
@@ -183,4 +183,78 @@ something like this:
 The "page" parameter is clearly set, as well as the controller and
 action names.
 
+Git Git Git
+-----------
+
+So, you've made some changes. Happy with them? Then commit! Ironically,
+"committing" your changes does not mean that you are committed to them,
+since you can always back up to a previous version, it just means you
+have committed them to repository in the same way you might commit your
+crazed aunt into a mental institution after she had a nervous breakdown
+at a family get-together.
+
+    $ git status
+    # On branch master
+    # Changed but not updated:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    # modified:   config/routes.rb
+    #
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    # app/controllers/public_controller.rb
+    # app/helpers/public_helper.rb
+    # app/views/public/
+    # test/functional/
+    # test/unit/
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+That *git status* command is pretty handy. It shows what's been changed
+and even gives some suggestions at the end. Let's add the changes (it
+means you are preparing them for being committed, much like getting your
+aunt into the car to take her to the institution). You get your changes
+into the "car" by adding them:
+
+    $ git add .
+
+Git is silent on this one. It figures you know what you're doing. That
+trusty *git status* command is a good one to throw out now, so you can
+see all your changes are buckled in the car (staged) and ready to be
+committed.
+
+    $ git status
+    # On branch master
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    # new file:   app/controllers/public_controller.rb
+    # new file:   app/helpers/public_helper.rb
+    # new file:   app/views/public/about.html.erb
+    # new file:   app/views/public/index.html.erb
+    # modified:   config/routes.rb
+    # new file:   test/functional/public_controller_test.rb
+    # new file:   test/unit/helpers/public_helper_test.rb
+    #
+
+Do the deed.
+
+    $ git commit -m "added public controller"
+    [master f2cc49b] added public controller
+     7 files changed, 41 insertions(+), 0 deletions(-)
+     create mode 100644 app/controllers/public_controller.rb
+     create mode 100644 app/helpers/public_helper.rb
+     create mode 100644 app/views/public/about.html.erb
+     create mode 100644 app/views/public/index.html.erb
+     create mode 100644 test/functional/public_controller_test.rb
+     create mode 100644 test/unit/helpers/public_helper_test.rb
+
+One final *git status* for good luck.
+
+    $ git status
+    # On branch master
+    nothing to commit (working directory clean)
+
+OK, now you're ready to move on to the next section.
 
