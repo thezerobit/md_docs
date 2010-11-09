@@ -27,8 +27,9 @@ Git:
 Ubuntu
 ------
 
-Install ruby1.8, ruby1.8-dev, build-essential, libxslt-dev, libxml2-dev,
-git-core
+    $ sudo apt-get install build-essential bison openssl libreadline6 \
+    libreadline5-dev curl git-core zlib1g zlib1g-dev libssl-dev \
+    libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev
 
 OS X
 ----
