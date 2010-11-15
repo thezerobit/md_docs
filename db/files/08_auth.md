@@ -151,7 +151,7 @@ something is entered into the password field, we should change the
       respond_to do |format|
         to_update = params[:admin].clone
         if to_update['password'] != ''
-          to_update['password'] = to_update['pasword'].hash # set password to hashed password
+          to_update['password'] = (Digest::SHA2.new << to_update['password']).to_s
         else
           to_update.delete('password') # remove password from update params
         end
@@ -240,11 +240,10 @@ Run the migration which adds the sessions table to your database:
 
 You should restart your server if it is running in a different terminal.
 
-
 Keeping the Admin Authentication in the Session
 -----------------------------------------------
 
-To handle logging and out of the session, let's create an AdminAuth
+To handle logging in and out of the session, let's create an AdminAuth
 controller with *login* and *logout* actions:
 
     $ rails generate controller AdminAuth login logout
@@ -285,7 +284,7 @@ at it, we can edit the logout controller to remove the admin_id
       def login
         if params[:name]
           matches = Admin.where(:name => params[:name], 
-                                :password => params[:password].hash)
+            :password => (Digest::SHA2.new << params['password']).to_s)
           if matches.length > 0
             admin = matches[0]     
             session[:admin_id] = admin.id   
@@ -308,10 +307,93 @@ action, so to get it to respond to the POST add the following line to
 
     post "admin_auth/login"
 
+Now, you should be able to try out the login page at
+[localhost:3000/admin_auth/login](http://localhost:3000/admin_auth/login).
 
+Protect Admin Pages
+-------------------
 
+OK, so now you want to keep non-admins out of the admin pages. Let's
+create a private method on the Application Controller
+(*app/controllers/application_controller.rb*):
 
+    class ApplicationController < ActionController::Base
+      protect_from_forgery
 
+      private
 
+      def check_admin
+        if session.has_key?(:admin_id)
+          true
+        else
+          render :nothing => true
+        end
+      end
+    end
 
+We'll use this as a *before&#95;filter* on any controllers we only want
+admins to have access to:
+
+*app/controllers/admins_controller.rb*:
+
+    class AdminsController < ApplicationController
+      before_filter :check_admin
+
+*app/controllers/products_controller.rb*:
+
+    class ProductsController < ApplicationController
+      before_filter :check_admin
+
+*app/controllers/categories_controller.rb*:
+
+    class CategoriesController < ApplicationController
+      before_filter :check_admin
+
+Now those pages will just render blank and do nothing unless the person
+accessing them is logged in as an admin. We could also redirect directly
+to the admin login page, but as an added measure of security, you don't
+want to advertise the admin login page.
+
+Last, but not least, you'll want to change the *logout* view
+*app/views/admin_auth/logout.html.erb* to something informing the admin
+that they are logged out.
+
+You should get blank pages for the Products, Admins, and Categories
+Controllers unless you are logged in as an admin. Now, the casual
+visitor to your site will not have access to view and change the
+contents of your site.
+
+Changing Password From Console
+------------------------------
+
+Now, of course the Admins Controller is what you use to add and change
+admin logins, so if you forget your password, you will not be able to
+log in as an admin to change it. So you're stuck. Well, you can always
+manipulate the database entries directly from the interactive console.
+Rails allows you to fire up the Ruby interpreter in interactive mode
+with all the access to the Rails systems you would have in normal code.
+You can get there with this command:
+
+    $ rails console
+
+Now, once you are in the console, you can manipulate objects in the
+database and save them.
+
+    $ rails console
+    Loading development environment (Rails 3.0.0)
+    ruby-1.9.2-p0 > Admin.all
+     => [#<Admin id: 2, name: "Steve", email: "myemail@email.com", password: "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca120...", created_at: "2010-11-15 01:13:42", updated_at: "2010-11-15 15:27:13">] 
+    ruby-1.9.2-p0 > me = Admin.find(2)
+     => #<Admin id: 2, name: "Steve", email: "myemail@email.com", password: "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca120...", created_at: "2010-11-15 01:13:42", updated_at: "2010-11-15 15:27:13"> 
+    ruby-1.9.2-p0 > me.password = (Digest::SHA2.new << 'secretsauce').to_s
+     => "544b9218c110325b61a91ad0cd60cd1bf9227ce789acb5b93b8debbd512684f4" 
+    ruby-1.9.2-p0 > me.save
+     => true 
+    ruby-1.9.2-p0 > Admin.all
+     => [#<Admin id: 2, name: "Steve", email: "myemail@email.com", password: "544b9218c110325b61a91ad0cd60cd1bf9227ce789acb5b93b8...", created_at: "2010-11-15 01:13:42", updated_at: "2010-11-15 16:00:12">] 
+    ruby-1.9.2-p0 > 
+
+After resetting my password in the console to 'secretsauce', I can now
+log in to the admin with that password. You quit the interactive console
+with Ctrl-D.
 
