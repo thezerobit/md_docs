@@ -99,18 +99,30 @@ actions:
 Add Product Images to Views
 ---------------------------
 
+In case products don't have an image set, we should create a method on
+the Product class that will return the image or a default if the
+attribute is nil *app/models/product.rb*:
+
+    class Product < ActiveRecord::Base
+      belongs_to :category
+
+      def get_image
+        return image || 'default.jpg'
+      end
+    end
+
 The most likely place to add the product image would be the *cat* action
 of the *public* controller. This is what you would add to show the
 product image in the view (*app/views/public/cat.html.erb*):
 
-    <%= image_tag "products/" + product.image %>
+    <%= image_tag "products/" + product.get_image %>
 
 If you want to see the image in the products controller admin, you could
 add the following to the *app/views/products/show.html.erb*:
 
     <p>
       <b>Image:</b>
-      <%= image_tag "products/" + @product.image %>
+      <%= image_tag "products/" + @product.get_image %>
     </p>
 
 
