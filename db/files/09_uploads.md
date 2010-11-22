@@ -13,7 +13,7 @@ not save empty folders, let's add a file in the folder so it can be
 kept.
 
     $ mkdir public/images/products
-    $ touch public/images/produtcts/.keep_folder
+    $ touch public/images/products/.keep_folder
 
 The *touch* command just creates an empty file.
 
