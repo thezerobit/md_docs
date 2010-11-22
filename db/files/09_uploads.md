@@ -75,7 +75,7 @@ as a private method.
       def handle_image_upload(params)
         if params[:image]
           uploaded_io = params[:image]
-          File.open(Rails.root.join('public', 'images','products',.
+          File.open(Rails.root.join('public', 'images','products',
               uploaded_io.original_filename), 'wb') do |file|
             file.write(uploaded_io.read)
           end
