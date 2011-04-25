@@ -79,7 +79,7 @@ as a private method.
               uploaded_io.original_filename), 'wb') do |file|
             file.write(uploaded_io.read)
           end
-          params[:product]['image'] = uploaded_io.original_filename
+		  @product.image = uploaded_io.original_filename
         end
       end
 
